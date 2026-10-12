@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Products - Farmer Portal - AgriConnect AI</title>
+  <meta name="description" content="Manage your active agricultural listings, update quantities, edit prices, or remove listings.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="farmer-dashboard.html">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="add-product.html">
+            <span>➕</span> Add Product
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-products.html" class="active">
+            <span>🌾</span> My Products
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="ai-prediction.html">
+            <span>🤖</span> AI Intelligence
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="farmer-orders.html">
+            <span>📦</span> Orders
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">2</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <h1 class="topbar-title">My Agricultural Products</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="add-product.html" class="btn btn-primary btn-sm">
+            <span>➕</span> Add New Produce
+          </a>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">
+                <span>🌾</span> Active Farm Listings
+              </h3>
+              <p class="text-sm text-muted">All products published and discoverable by registered buyers</p>
+            </div>
+            <div id="product-count-badge" class="badge badge-primary">Loading...</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="my-products-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="my-products-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div id="edit-modal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div style="padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between;">
+        <h3 style="font-size: 1.25rem; color: var(--primary);">Edit Listing</h3>
+        <button type="button" id="close-modal-btn" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="edit-product-form" style="padding: 2rem;">
+        <input type="hidden" id="edit-id">
+        <div class="form-group">
+          <label class="form-label" for="edit-name">Product Name</label>
+          <input type="text" id="edit-name" class="form-control" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="edit-quantity">Quantity (kg)</label>
+            <input type="number" id="edit-quantity" class="form-control" required min="1">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-price">Price (₹/kg)</label>
+            <input type="number" id="edit-price" class="form-control" required min="1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-status">Status</label>
+          <select id="edit-status" class="form-control">
+            <option value="Active">Active (Available)</option>
+            <option value="Sold Out">Sold Out</option>
+            <option value="Harvesting">Harvesting Soon</option>
+          </select>
+        </div>
+        <div class="flex justify-between" style="margin-top: 1.5rem;">
+          <button type="button" class="btn btn-outline" id="cancel-edit-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTable();
+
+      function renderTable() {
+        const user = window.store.getCurrentUser();
+        const products = window.store.getProducts({ farmerId: user.id });
+        const tbody = document.getElementById('my-products-tbody');
+        document.getElementById('product-count-badge').textContent = `${products.length} Products`;
+
+        if (!products.length) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 3rem 1rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌱</div>
+                <h4>No products listed yet</h4>
+                <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">Start by listing your harvested crops for wholesale buyers.</p>
+                <a href="add-product.html" class="btn btn-primary btn-sm">Add Your First Product</a>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = products.map(p => `
+          <tr id="row-${p.id}">
+            <td>
+              <img src="${p.image}" class="table-thumb" alt="${p.name}">
+            </td>
+            <td>
+              <strong>${p.name}</strong>
+              <div class="text-xs text-muted">${p.category} • ${p.quality || 'Grade A'}</div>
+            </td>
+            <td>
+              <strong>${p.quantity} ${p.unit}</strong>
+            </td>
+            <td>
+              <strong style="color:var(--primary); font-size:1.05rem;">₹${p.price}/${p.unit}</strong>
+            </td>
+            <td>
+              <span class="badge ${p.status === 'Active' ? 'badge-success' : 'badge-warning'}">${p.status}</span>
+            </td>
+            <td>
+              <div class="flex gap-2">
+                <button class="btn btn-outline btn-sm edit-btn" data-id="${p.id}">Edit</button>
+                <button class="btn btn-danger btn-sm delete-btn" data-id="${p.id}">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+
+        // Attach Delete listeners
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            const p = window.store.getProductById(id);
+            if (confirm(`Are you sure you want to delete ${p ? p.name : 'this listing'}?`)) {
+              window.store.deleteProduct(id);
+              App.showToast('Listing removed successfully', 'info');
+              renderTable();
+            }
+          });
+        });
+
+        // Attach Edit listeners
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            const p = window.store.getProductById(id);
+            if (p) {
+              document.getElementById('edit-id').value = p.id;
+              document.getElementById('edit-name').value = p.name;
+              document.getElementById('edit-quantity').value = p.quantity;
+              document.getElementById('edit-price').value = p.price;
+              document.getElementById('edit-status').value = p.status || 'Active';
+              document.getElementById('edit-modal').classList.add('active');
+            }
+          });
+        });
+      }
+
+      // Modal Controls
+      const modal = document.getElementById('edit-modal');
+      const closeModal = () => modal.classList.remove('active');
+      document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+      document.getElementById('cancel-edit-btn').addEventListener('click', closeModal);
+
+      // Handle Edit submission
+      document.getElementById('edit-product-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('edit-id').value;
+        window.store.updateProduct(id, {
+          name: document.getElementById('edit-name').value,
+          quantity: Number(document.getElementById('edit-quantity').value),
+          price: Number(document.getElementById('edit-price').value),
+          status: document.getElementById('edit-status').value
+        });
+
+        App.showToast('Product updated successfully!', 'success');
+        closeModal();
+        renderTable();
+      });
+    });
+  </script>
+</body>
+</html>

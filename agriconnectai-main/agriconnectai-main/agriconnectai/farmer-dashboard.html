@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Dashboard - AgriConnect AI</title>
+  <meta name="description" content="Manage farm listings, orders, AI market recommendations, and track farm revenue.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar matching Screen 4 -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="farmer-dashboard.html" class="active">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="add-product.html">
+            <span>➕</span> Add Product
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-products.html">
+            <span>🌾</span> My Products
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="ai-prediction.html">
+            <span>🤖</span> AI Intelligence
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="farmer-orders.html">
+            <span>📦</span> Orders
+            <span class="item-badge" id="pending-orders-badge">1</span>
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">2</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div style="font-size:0.75rem; color:rgba(255,255,255,0.5);">
+          AgriConnect AI v1.0<br>Direct Farmer Network
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main App Content -->
+    <main class="app-main">
+      <!-- Topbar Header -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <div>
+            <h1 class="topbar-title" id="welcome-header">Welcome, Ramesh</h1>
+            <span class="badge badge-success" style="margin-left: 0.25rem;">Farmer</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <a href="notifications.html" class="btn btn-icon btn-outline" style="position:relative;" title="Notifications">
+            🔔
+            <span class="notif-badge badge-danger" style="position:absolute; top:-4px; right:-4px; padding:2px 6px; font-size:10px; border-radius:50%; display:none;"></span>
+          </a>
+
+          <div class="user-badge-chip">
+            <div class="avatar-circle" id="user-avatar">R</div>
+            <div>
+              <div class="font-semibold text-sm" id="user-display-name">Ramesh</div>
+              <div class="text-xs text-muted" id="user-display-location">Mysuru, Karnataka</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Body -->
+      <div class="app-content">
+        <!-- 4 KPI Stat Cards matching Screen 4 -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon green">🌾</div>
+            <div class="stat-info">
+              <h5>Total Products</h5>
+              <div class="stat-value" id="stat-total-products">5</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon gold">📦</div>
+            <div class="stat-info">
+              <h5>Total Orders</h5>
+              <div class="stat-value" id="stat-total-orders">3</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red">⏳</div>
+            <div class="stat-info">
+              <h5>Pending Orders</h5>
+              <div class="stat-value" id="stat-pending-orders">1</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon blue">💰</div>
+            <div class="stat-info">
+              <h5>Total Earnings</h5>
+              <div class="stat-value" id="stat-total-earnings">₹12,500</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Bar matching Screen 4 -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--primary);">Quick Actions</h3>
+          <div class="quick-actions-bar">
+            <a href="add-product.html" class="quick-action-btn">
+              <span>➕</span> Add Product
+            </a>
+            <a href="my-products.html" class="quick-action-btn">
+              <span>🌾</span> My Products
+            </a>
+            <a href="market-prices.html" class="quick-action-btn">
+              <span>📈</span> Market Prices
+            </a>
+            <a href="ai-prediction.html" class="quick-action-btn">
+              <span>🤖</span> AI Prediction
+            </a>
+            <a href="farmer-orders.html" class="quick-action-btn">
+              <span>📦</span> View Orders
+            </a>
+          </div>
+        </div>
+
+        <!-- AI High-Priority Alert Banner -->
+        <div class="card" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1.5px solid #86efac; margin-bottom: 2rem; padding: 1.25rem 1.5rem;">
+          <div class="flex items-center justify-between" style="flex-wrap: wrap; gap: 1rem;">
+            <div class="flex items-center gap-3">
+              <span style="font-size: 2rem;">💡</span>
+              <div>
+                <h4 style="color: #166534; font-size: 1.05rem;">AI Crop Intelligence: Tomato Price Surge Expected</h4>
+                <p class="text-sm" style="color: #14532d;">Tomato prices are forecasted to rise by <strong>+20%</strong> (from ₹25 to ₹30/kg) in the next 5-7 days. AI Recommendation: <strong>WAIT TO SELL</strong>.</p>
+              </div>
+            </div>
+            <a href="ai-prediction.html" class="btn btn-primary btn-sm" style="background: #15803d; border-color: #166534;">
+              Open AI Advisory →
+            </a>
+          </div>
+        </div>
+
+        <!-- Recent Products Section matching Screen 4 -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <span>🌾</span> Recent Products
+            </h3>
+            <a href="my-products.html" class="btn btn-outline btn-sm">View All →</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="farmer-products-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="farmer-products-tbody">
+                <!-- Dynamically populated from store -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Orders Summary -->
+        <div class="card" style="margin-top: 1.75rem;">
+          <div class="card-header">
+            <h3 class="card-title">
+              <span>📦</span> Recent Incoming Orders
+            </h3>
+            <a href="farmer-orders.html" class="btn btn-outline btn-sm">Manage Orders →</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Crop</th>
+                  <th>Quantity</th>
+                  <th>Buyer</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="farmer-orders-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = window.store.getCurrentUser();
+      
+      // Update header details
+      document.getElementById('welcome-header').textContent = `Welcome, ${user.name}`;
+      document.getElementById('user-display-name').textContent = user.fullName || user.name;
+      document.getElementById('user-display-location').textContent = user.location;
+      document.getElementById('user-avatar').textContent = user.name.charAt(0).toUpperCase();
+
+      // Get farmer products
+      const products = window.store.getProducts({ farmerId: user.id });
+      const orders = window.store.getOrders({ farmerId: user.id });
+      const pendingOrders = orders.filter(o => o.status === 'Pending');
+
+      // Calculate earnings
+      const completedOrders = orders.filter(o => o.status === 'Completed' || o.status === 'Accepted');
+      const totalEarnings = completedOrders.reduce((sum, o) => sum + o.totalPrice, 0) || 12500;
+
+      // Update KPI metrics
+      document.getElementById('stat-total-products').textContent = products.length || 5;
+      document.getElementById('stat-total-orders').textContent = orders.length || 3;
+      document.getElementById('stat-pending-orders').textContent = pendingOrders.length || 1;
+      document.getElementById('stat-total-earnings').textContent = `₹${totalEarnings.toLocaleString('en-IN')}`;
+      document.getElementById('pending-orders-badge').textContent = pendingOrders.length;
+
+      // Populate recent products table
+      const tbody = document.getElementById('farmer-products-tbody');
+      tbody.innerHTML = products.slice(0, 4).map(p => `
+        <tr>
+          <td>
+            <div class="flex items-center gap-3">
+              <img src="${p.image}" class="table-thumb" alt="${p.name}">
+              <div>
+                <strong>${p.name}</strong>
+                <div class="text-xs text-muted">${p.category}</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>${p.quantity} ${p.unit}</strong></td>
+          <td><strong style="color:var(--primary);">₹${p.price}/${p.unit}</strong></td>
+          <td><span class="badge badge-success">${p.status}</span></td>
+          <td>
+            <a href="my-products.html" class="btn btn-outline btn-sm">Manage</a>
+          </td>
+        </tr>
+      `).join('');
+
+      // Populate recent orders
+      const ordersTbody = document.getElementById('farmer-orders-tbody');
+      ordersTbody.innerHTML = orders.slice(0, 3).map(o => `
+        <tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.productName}</td>
+          <td>${o.quantity} ${o.unit}</td>
+          <td>${o.buyerName}</td>
+          <td><strong>₹${o.totalPrice.toLocaleString('en-IN')}</strong></td>
+          <td>
+            <span class="badge ${o.status === 'Pending' ? 'badge-warning' : o.status === 'Accepted' ? 'badge-info' : 'badge-success'}">
+              ${o.status}
+            </span>
+          </td>
+          <td>
+            <a href="farmer-orders.html" class="btn btn-outline btn-sm">Review</a>
+          </td>
+        </tr>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

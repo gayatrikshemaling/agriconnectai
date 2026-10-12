@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Dashboard - AgriConnect AI</title>
+  <meta name="description" content="Wholesale produce procurement, direct farm orders tracking, and price monitoring for commercial buyers.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar matching Screen 9 -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="buyer-dashboard.html" class="active">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="marketplace.html">
+            <span>🛒</span> Marketplace
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-orders.html">
+            <span>📦</span> My Orders
+            <span class="item-badge" id="buyer-orders-badge">2</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">1</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div style="font-size:0.75rem; color:rgba(255,255,255,0.5);">
+          AgriConnect AI v1.0<br>Verified Commercial Buyer
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <div>
+            <h1 class="topbar-title" id="welcome-buyer-header">Welcome, Priya</h1>
+            <span class="badge badge-info" style="margin-left: 0.25rem;">Buyer</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="user-badge-chip">
+            <div class="avatar-circle" style="background:#0284c7;">P</div>
+            <div>
+              <div class="font-semibold text-sm">Priya Sharma</div>
+              <div class="text-xs text-muted">FreshMart Procurement</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <!-- 3-4 Stat Cards matching Screen 9 -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">📦</div>
+            <div class="stat-info">
+              <h5>Total Orders</h5>
+              <div class="stat-value" id="stat-buyer-total-orders">4</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon gold">⏳</div>
+            <div class="stat-info">
+              <h5>Pending Orders</h5>
+              <div class="stat-value" id="stat-buyer-pending-orders">2</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-info">
+              <h5>Completed Orders</h5>
+              <div class="stat-value" id="stat-buyer-completed-orders">1</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon gold">💳</div>
+            <div class="stat-info">
+              <h5>Total Procurement</h5>
+              <div class="stat-value" id="stat-buyer-total-spent">₹2,250</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Bar matching Screen 9 -->
+        <div style="margin-bottom: 2rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--primary);">Quick Actions</h3>
+          <div class="quick-actions-bar">
+            <a href="marketplace.html" class="quick-action-btn">
+              <span>🛒</span> Browse Products
+            </a>
+            <a href="marketplace.html" class="quick-action-btn">
+              <span>🔍</span> Search Products
+            </a>
+            <a href="my-orders.html" class="quick-action-btn">
+              <span>📦</span> My Orders
+            </a>
+            <a href="profile.html" class="quick-action-btn">
+              <span>👤</span> Profile
+            </a>
+          </div>
+        </div>
+
+        <!-- Featured Marketplace Harvests matching Screen 9 -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">
+                <span>🌱</span> Featured Farm Produce
+              </h3>
+              <p class="text-sm text-muted">Direct from certified nearby farms with farm gate pickup available</p>
+            </div>
+            <a href="marketplace.html" class="btn btn-outline btn-sm">Explore All Listings →</a>
+          </div>
+
+          <div class="products-grid" id="buyer-featured-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Recent Buyer Orders Preview -->
+        <div class="card" style="margin-top: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title">
+              <span>🚚</span> Recent Orders Track
+            </h3>
+            <a href="my-orders.html" class="btn btn-outline btn-sm">View Full History →</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Farmer</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="buyer-recent-orders-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ensure current user is Priya or Buyer
+      let user = window.store.getCurrentUser();
+      if (user.role !== 'Buyer') {
+        user = window.store.switchRole('Buyer');
+      }
+
+      const orders = window.store.getOrders({ buyerId: user.id });
+      const pendingOrders = orders.filter(o => o.status === 'Pending');
+      const completedOrders = orders.filter(o => o.status === 'Completed');
+      const totalSpent = orders.reduce((sum, o) => sum + o.totalPrice, 0) || 2250;
+
+      document.getElementById('stat-buyer-total-orders').textContent = orders.length || 4;
+      document.getElementById('stat-buyer-pending-orders').textContent = pendingOrders.length || 2;
+      document.getElementById('stat-buyer-completed-orders').textContent = completedOrders.length || 1;
+      document.getElementById('stat-buyer-total-spent').textContent = `₹${totalSpent.toLocaleString('en-IN')}`;
+      document.getElementById('buyer-orders-badge').textContent = pendingOrders.length;
+
+      // Render featured products
+      const prods = window.store.getProducts().slice(0, 3);
+      const grid = document.getElementById('buyer-featured-grid');
+      grid.innerHTML = prods.map(p => `
+        <div class="product-card">
+          <div class="product-image-wrap">
+            <img src="${p.image}" alt="${p.name}">
+            <div class="product-badge-float">
+              <span class="badge badge-success">Available</span>
+            </div>
+          </div>
+          <div class="product-card-body">
+            <div class="product-category">${p.category}</div>
+            <h3 class="product-title">${p.name}</h3>
+            <div class="product-meta">
+              <span>📍 ${p.location}</span>
+              <span>•</span>
+              <span>🧑‍🌾 ${p.farmerName}</span>
+            </div>
+            <div class="product-price-row">
+              <div class="product-price">₹${p.price}<span class="text-sm text-muted">/${p.unit}</span></div>
+              <div class="product-stock">${p.quantity} ${p.unit} in stock</div>
+            </div>
+            <div style="margin-top: 1rem; display:flex; gap:0.5rem;">
+              <a href="product-details.html?id=${p.id}" class="btn btn-outline btn-sm" style="flex:1;">Details</a>
+              <a href="place-order.html?productId=${p.id}" class="btn btn-primary btn-sm" style="flex:1;">Order</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Render recent orders
+      const tbody = document.getElementById('buyer-recent-orders-tbody');
+      tbody.innerHTML = orders.slice(0, 3).map(o => `
+        <tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.productName}</td>
+          <td>${o.quantity} ${o.unit}</td>
+          <td>🧑‍🌾 ${o.farmerName}</td>
+          <td><strong style="color:var(--primary);">₹${o.totalPrice.toLocaleString('en-IN')}</strong></td>
+          <td>
+            <span class="badge ${o.status === 'Pending' ? 'badge-warning' : o.status === 'Accepted' ? 'badge-info' : 'badge-success'}">
+              ${o.status}
+            </span>
+          </td>
+          <td>
+            <a href="my-orders.html" class="btn btn-outline btn-sm">Track</a>
+          </td>
+        </tr>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

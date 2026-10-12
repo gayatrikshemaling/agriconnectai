@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - AgriConnect AI</title>
+  <meta name="description" content="Register as a farmer or buyer on AgriConnect AI marketplace.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <a href="index.html" class="brand" style="justify-content: center; margin-bottom: 0.75rem;">
+        <div class="brand-icon">🌱</div>
+        <span>AgriConnect <span class="ai-tag">AI</span></span>
+      </a>
+      <h2 style="font-size: 1.75rem; color: var(--primary);">Create Account</h2>
+      <p class="text-muted text-sm">Join the farmer-to-buyer marketplace</p>
+    </div>
+
+    <!-- Quick Demo Fill Helper -->
+    <div class="auth-demo-bar">
+      <div class="flex items-center justify-between">
+        <span class="text-xs text-muted font-semibold">⚡ QUICK TEST FILL:</span>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-outline btn-sm" id="fill-farmer-btn">New Farmer</button>
+          <button type="button" class="btn btn-outline btn-sm" id="fill-buyer-btn">New Buyer</button>
+        </div>
+      </div>
+    </div>
+
+    <form id="register-form">
+      <div class="form-group">
+        <label class="form-label" for="full-name">Full Name</label>
+        <input type="text" id="full-name" class="form-control" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Enter your password" required minlength="6">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="phone">Phone Number</label>
+        <input type="tel" id="phone" class="form-control" placeholder="Enter phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="role">Register As</label>
+        <select id="role" class="form-control" required>
+          <option value="Farmer" selected>Farmer (Seller)</option>
+          <option value="Buyer">Buyer (Wholesale / Retailer / Consumer)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="location">Location</label>
+        <input type="text" id="location" class="form-control" placeholder="Enter your city/district and state" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;" id="submit-register-btn">
+        Create Account
+      </button>
+
+      <div class="text-center" style="margin-top: 1.5rem;">
+        <span class="text-sm text-muted">Already have an account? </span>
+        <a href="login.html" class="text-sm font-semibold" style="color: var(--primary);">Login</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('register-form');
+      const fullNameInput = document.getElementById('full-name');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const phoneInput = document.getElementById('phone');
+      const roleSelect = document.getElementById('role');
+      const locationInput = document.getElementById('location');
+
+      // Demo quick fills
+      document.getElementById('fill-farmer-btn').addEventListener('click', () => {
+        fullNameInput.value = 'Shivanna Kumar';
+        emailInput.value = 'shivanna@agri.com';
+        passwordInput.value = 'Farmer@123';
+        phoneInput.value = '+91 98451 99887';
+        roleSelect.value = 'Farmer';
+        locationInput.value = 'Hassan, Karnataka';
+      });
+
+      document.getElementById('fill-buyer-btn').addEventListener('click', () => {
+        fullNameInput.value = 'Kiran Organics';
+        emailInput.value = 'kiran@organics.in';
+        passwordInput.value = 'Buyer@123';
+        phoneInput.value = '+91 99882 11223';
+        roleSelect.value = 'Buyer';
+        locationInput.value = 'Bengaluru, Karnataka';
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        try {
+          const user = window.store.register({
+            fullName: fullNameInput.value.trim(),
+            email: emailInput.value.trim(),
+            password: passwordInput.value,
+            phone: phoneInput.value.trim(),
+            role: roleSelect.value,
+            location: locationInput.value.trim()
+          });
+
+          App.showToast(`Account created successfully as ${user.role}! Redirecting...`, 'success');
+
+          setTimeout(() => {
+            if (user.role === 'Farmer') {
+              window.location.href = 'farmer-dashboard.html';
+            } else if (user.role === 'Buyer') {
+              window.location.href = 'buyer-dashboard.html';
+            } else {
+              window.location.href = 'index.html';
+            }
+          }, 1000);
+        } catch (err) {
+          App.showToast(err.message, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

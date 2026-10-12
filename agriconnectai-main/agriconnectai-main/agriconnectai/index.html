@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriConnect AI - Direct Farmer-to-Buyer Marketplace</title>
+  <meta name="description"
+    content="Direct Farmer-to-Buyer Agricultural Marketplace with AI-powered crop intelligence, fair price forecasting, and transparent farm trade.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" id="brand-logo">
+        <div class="brand-icon">🌱</div>
+        <span>AgriConnect <span class="ai-tag">AI</span></span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="farmer-dashboard.html">Farmer Dashboard</a></li>
+        <li><a href="buyer-dashboard.html">Buyer Dashboard</a></li>
+        <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="marketplace.html">Marketplace</a></li>
+        <li><a href="market-prices.html">Market Prices</a></li>
+        <li><a href="ai-prediction.html">AI Intelligence</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+      </ul>
+
+      <div class="nav-auth">
+        <a href="login.html" class="btn btn-outline" id="nav-login-btn">Login</a>
+        <a href="register.html" class="btn btn-primary" id="nav-register-btn">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section matching Screen 1 -->
+  <section class="hero-section" style="background-image: url('images/hero-farm.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span>✨ Next-Gen Agricultural Commerce</span>
+      </div>
+
+      <h1 class="hero-title">AgriConnect AI</h1>
+      <h2 class="hero-subtitle">Direct Farmer-to-Buyer Marketplace</h2>
+
+      <p style="font-size:1.15rem; color:#e2f1e6; margin-bottom: 2rem; font-weight:500;">
+        Fresh Produce &nbsp;•&nbsp; Better Prices &nbsp;•&nbsp; Stronger Farmers
+      </p>
+
+      <div class="hero-actions">
+        <a href="register.html" class="btn btn-primary btn-lg" id="hero-register-btn"
+          style="background:#2d6a4f; border-color:#40916c;">
+          🌾 Register as Farmer
+        </a>
+        <a href="login.html" class="btn btn-outline-white btn-lg" id="hero-login-btn">
+          🔑 Login to Portal
+        </a>
+        <a href="marketplace.html" class="btn btn-outline-white btn-lg" id="hero-market-btn">
+          🛒 Explore Marketplace
+        </a>
+      </div>
+
+      <!-- 3 Feature Highlight Pills -->
+      <div class="hero-features-bar">
+        <div class="feature-pill">
+          <div class="feature-icon-box">🤝</div>
+          <div>
+            <h4>Direct Connection</h4>
+            <p>No Middlemen, zero hidden broker commissions</p>
+          </div>
+        </div>
+
+        <div class="feature-pill">
+          <div class="feature-icon-box">💰</div>
+          <div>
+            <h4>Fair Prices</h4>
+            <p>Better earnings for farmers, lower costs for buyers</p>
+          </div>
+        </div>
+
+        <div class="feature-pill">
+          <div class="feature-icon-box">🤖</div>
+          <div>
+            <h4>AI Powered</h4>
+            <p>Smart decisions with 7-day predictive price trends</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Fresh Produce Section -->
+  <section class="section">
+    <div class="container">
+      <div class="flex items-center justify-between" style="margin-bottom: 2rem;">
+        <div>
+          <h2 class="section-title">Featured Fresh Harvests</h2>
+          <p class="text-muted">Directly sourced from verified local farm gates</p>
+        </div>
+        <a href="marketplace.html" class="btn btn-outline">View All Listings →</a>
+      </div>
+
+      <div class="products-grid" id="home-featured-grid">
+        <!-- Dynamically populated from store -->
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section" id="how-it-works"
+    style="background: #ffffff; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">How AgriConnect AI Works</h2>
+        <p class="section-subtitle">Bridging the gap between agricultural producers and commercial buyers with real-time
+          transparency.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon">🧑‍🌾</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Farmers List Produce</h3>
+          <p class="text-muted text-sm">Publish crop quantity, harvest date, location, and photos with zero listing
+            fees.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon">📈</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">AI Price Advisory</h3>
+          <p class="text-muted text-sm">Review real-time mandi prices and AI predictive trend curves before setting your
+            selling price.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon">🛒</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Buyers Order Directly</h3>
+          <p class="text-muted text-sm">Discover produce by category and region. Place bulk orders with transparent
+            pricing.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon">🚚</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Order Confirmation</h3>
+          <p class="text-muted text-sm">Farmers accept incoming orders and arrange seamless farm gate dispatch and
+            delivery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Role Access Cards -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 2.5rem;">
+        <h2 class="section-title">Choose Your Portal</h2>
+        <p class="text-muted">Dedicated dashboards customized for every stakeholder</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.75rem;">
+        <div class="card" style="border-top: 4px solid var(--primary); text-align: center; padding: 2.5rem 1.75rem;">
+          <div style="font-size: 2.75rem; margin-bottom: 1rem;">👨‍🌾</div>
+          <h3 style="margin-bottom: 0.5rem;">Farmer Portal</h3>
+          <p class="text-muted text-sm" style="margin-bottom: 1.5rem;">Manage listings, track buyer orders, monitor
+            wholesale APMC mandi rates, and get AI recommendations.</p>
+          <a href="farmer-dashboard.html" class="btn btn-primary" style="width: 100%;">Open Farmer Dashboard</a>
+        </div>
+
+        <div class="card"
+          style="border-top: 4px solid var(--accent-green); text-align: center; padding: 2.5rem 1.75rem;">
+          <div style="font-size: 2.75rem; margin-bottom: 1rem;">🏬</div>
+          <h3 style="margin-bottom: 0.5rem;">Buyer Portal</h3>
+          <p class="text-muted text-sm" style="margin-bottom: 1.5rem;">Browse authentic farm harvests, filter by
+            district, place direct orders, and review real-time order status.</p>
+          <a href="buyer-dashboard.html" class="btn btn-outline" style="width: 100%;">Open Buyer Dashboard</a>
+        </div>
+
+        <div class="card"
+          style="border-top: 4px solid var(--accent-gold); text-align: center; padding: 2.5rem 1.75rem;">
+          <div style="font-size: 2.75rem; margin-bottom: 1rem;">🛡️</div>
+          <h3 style="margin-bottom: 0.5rem;">Admin Portal</h3>
+          <p class="text-muted text-sm" style="margin-bottom: 1.5rem;">Monitor marketplace volume, verify farmer
+            accounts, review product listings, and track platform metrics.</p>
+          <a href="admin-dashboard.html" class="btn btn-outline" style="width: 100%;">Open Admin Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon">🌱</div>
+            <span>AgriConnect <span class="ai-tag">AI</span></span>
+          </div>
+          <p style="font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.6;">
+            Direct Farmer-to-Buyer Marketplace with AI-Powered Crop Intelligence and Smart Selling Decision Support.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Marketplace</h5>
+          <ul>
+            <li><a href="marketplace.html">Browse All Crops</a></li>
+            <li><a href="market-prices.html">APMC Market Prices</a></li>
+            <li><a href="ai-prediction.html">AI Price Forecast</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Portals</h5>
+          <ul>
+            <li><a href="farmer-dashboard.html">Farmer Dashboard</a></li>
+            <li><a href="buyer-dashboard.html">Buyer Dashboard</a></li>
+            <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Account</h5>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Create Account</a></li>
+            <li><a href="profile.html">User Profile</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 AgriConnect AI. Empowering Farmers • Connecting Buyers • Smarter Agriculture with AI.</p>
+        <p>Built for direct farmer empowerment</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Render featured products on home page
+    document.addEventListener('DOMContentLoaded', () => {
+      const prods = window.store.getProducts().slice(0, 4);
+      const container = document.getElementById('home-featured-grid');
+      if (container) {
+        container.innerHTML = prods.map(p => `
+          <div class="product-card">
+            <div class="product-image-wrap">
+              <img src="${p.image}" alt="${p.name}">
+              <div class="product-badge-float">
+                <span class="badge badge-success">Available</span>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <div class="product-category">${p.category}</div>
+              <h3 class="product-title">${p.name}</h3>
+              <div class="product-meta">
+                <span>📍 ${p.location}</span>
+                <span>•</span>
+                <span>🧑‍🌾 ${p.farmerName}</span>
+              </div>
+              <div class="product-price-row">
+                <div class="product-price">₹${p.price}<span class="text-sm text-muted">/${p.unit}</span></div>
+                <div class="product-stock">${p.quantity} ${p.unit} in stock</div>
+              </div>
+              <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                <a href="product-details.html?id=${p.id}" class="btn btn-outline btn-sm" style="flex:1;">Details</a>
+                <a href="place-order.html?productId=${p.id}" class="btn btn-primary btn-sm" style="flex:1;">Order</a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+
+</html>

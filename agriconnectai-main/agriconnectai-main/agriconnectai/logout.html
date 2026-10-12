@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logged Out - AgriConnect AI</title>
+  <meta name="description" content="Successfully logged out of AgriConnect AI.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f281d 0%, #1b4332 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal card exactly matching Screen 18 -->
+  <div class="card" style="max-width: 440px; width: 90%; text-align: center; padding: 3rem 2rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: none;">
+    <div style="width: 72px; height: 72px; border-radius: 50%; background: #d8f3dc; color: #1b4332; display: flex; align-items: center; justify-content: center; font-size: 2.25rem; margin: 0 auto 1.5rem;">
+      ✅
+    </div>
+
+    <h2 style="font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
+      Logged out successfully!
+    </h2>
+
+    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5;">
+      Thank you for using AgriConnect AI.<br>
+      Empowering Farmers • Connecting Buyers.
+    </p>
+
+    <a href="index.html" class="btn btn-primary btn-lg" style="width: 100%; border-radius: var(--radius-md);" id="logout-ok-btn">
+      OK
+    </a>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.store) {
+        window.store.logout();
+      }
+    });
+  </script>
+</body>
+</html>

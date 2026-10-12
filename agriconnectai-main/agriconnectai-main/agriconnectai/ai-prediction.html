@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Crop Intelligence & Price Prediction - AgriConnect AI</title>
+  <meta name="description" content="AI-driven agricultural price forecasting, smart selling decision support, and market trend analysis.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="farmer-dashboard.html">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="add-product.html">
+            <span>➕</span> Add Product
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-products.html">
+            <span>🌾</span> My Products
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="ai-prediction.html" class="active">
+            <span>🤖</span> AI Intelligence
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="farmer-orders.html">
+            <span>📦</span> Orders
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">2</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <div>
+            <h1 class="topbar-title">AI Crop Intelligence</h1>
+            <span class="badge badge-primary">Smart Selling Support</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="market-prices.html" class="btn btn-outline btn-sm">APMC Live Mandi Data</a>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <!-- Crop Selection Bar matching Screen 7 -->
+        <div class="filter-bar" style="background:white; padding:1.5rem; margin-bottom:2rem;">
+          <div class="filter-group" style="flex: 2;">
+            <label class="form-label" style="margin-bottom:0; font-weight:700; white-space:nowrap;" for="crop-selector">Select Crop:</label>
+            <select id="crop-selector" class="form-control" style="font-weight:600;">
+              <option value="Tomato" selected>🍅 Tomato (Local & Hybrid)</option>
+              <option value="Onion">🧅 Onion (Red Nasik)</option>
+              <option value="Potato">🥔 Potato (Organic Table)</option>
+              <option value="Carrot">🥕 Carrot (Sweet Ooty)</option>
+              <option value="Wheat">🌾 Wheat (Sharbati)</option>
+            </select>
+          </div>
+
+          <button id="get-prediction-btn" class="btn btn-primary" style="flex: 1; min-width: 170px;">
+            <span>🤖</span> Get Prediction
+          </button>
+        </div>
+
+        <!-- 3 KPI Metric Cards for Prediction matching Screen 7 -->
+        <div class="stats-grid" style="margin-bottom: 2rem;">
+          <div class="stat-card">
+            <div class="stat-icon green">💰</div>
+            <div class="stat-info">
+              <h5>Current APMC Price</h5>
+              <div class="stat-value" id="current-price-val">₹25/kg</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon gold">🎯</div>
+            <div class="stat-info">
+              <h5>Predicted Price (7 Day)</h5>
+              <div class="stat-value" id="predicted-price-val" style="color:var(--primary);">₹30/kg</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon blue">📊</div>
+            <div class="stat-info">
+              <h5>Expected Change</h5>
+              <div class="stat-value" id="expected-change-val" style="color:#059669;">+20%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column Layout: AI Recommendation & Trend Chart -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;" id="ai-main-grid">
+          <!-- AI Recommendation Box -->
+          <div class="ai-recommendation-card">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #a7f3d0; margin-bottom: 0.75rem;">
+              Decision Recommendation
+            </div>
+            
+            <div class="ai-decision-badge" id="ai-decision-badge">WAIT TO SELL</div>
+
+            <p id="ai-summary-text" style="font-size: 1.05rem; line-height: 1.6; color: #f0fdf4; margin-bottom: 1.5rem;">
+              Price is expected to increase in the next 5-7 days due to anticipated local market supply shortages and high festive demand.
+            </p>
+
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 1rem;">
+              <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
+                <span class="text-xs font-semibold" style="color:#a7f3d0;">PRIMARY DRIVING FACTORS</span>
+                <span class="badge" style="background:rgba(255,255,255,0.2); color:white;" id="ai-confidence-badge">88% Confidence</span>
+              </div>
+              <ul class="ai-factors-list" id="ai-factors-list">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Price Trend Forecast Chart matching Screen 7 -->
+          <div class="card" style="display:flex; flex-direction:column;">
+            <div class="card-header">
+              <h3 class="card-title">
+                <span>📈</span> 7-Day Forecast Trajectory
+              </h3>
+              <span class="badge badge-primary" id="crop-trend-label">Tomato Price Forecast</span>
+            </div>
+
+            <div class="chart-container" style="flex:1;">
+              <canvas id="prediction-canvas"></canvas>
+            </div>
+            
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); padding-top:0.75rem;">
+              <span>• Source: Historical Mandi Trends + Arrival Forecasting</span>
+              <span>• Informational prototype</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Educational Disclaimer banner -->
+        <div class="card" style="background:#f8faf9; border-left:4px solid var(--accent-gold);">
+          <div class="flex items-center gap-3">
+            <span style="font-size:1.5rem;">ℹ️</span>
+            <div>
+              <strong>Prototype Notice & Agricultural Methodology:</strong>
+              <p class="text-xs text-muted">
+                AgriConnect AI provides statistical decision support based on seasonal arrivals and market momentum. It does not replace independent agronomic appraisal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    @media (max-width: 992px) {
+      #ai-main-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+
+  <script src="js/store.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cropSelector = document.getElementById('crop-selector');
+      const getPredBtn = document.getElementById('get-prediction-btn');
+      const canvas = document.getElementById('prediction-canvas');
+
+      function updatePrediction(crop) {
+        const pred = window.store.getAiPrediction(crop);
+
+        document.getElementById('current-price-val').textContent = `₹${pred.currentPrice}/kg`;
+        document.getElementById('predicted-price-val').textContent = `₹${pred.predictedPrice}/kg`;
+        
+        const changeElem = document.getElementById('expected-change-val');
+        changeElem.textContent = pred.changePercent;
+        changeElem.style.color = pred.direction === 'up' ? '#059669' : pred.direction === 'down' ? '#dc2626' : '#b45309';
+
+        const badge = document.getElementById('ai-decision-badge');
+        badge.textContent = pred.decision;
+        badge.className = `ai-decision-badge ${pred.badgeClass}`;
+
+        document.getElementById('ai-summary-text').textContent = pred.summary;
+        document.getElementById('ai-confidence-badge').textContent = pred.confidence;
+        document.getElementById('crop-trend-label').textContent = `${crop} Price Forecast`;
+
+        const factorsList = document.getElementById('ai-factors-list');
+        factorsList.innerHTML = pred.factors.map(f => `
+          <li><span style="color:#52b788;">✔</span> ${f}</li>
+        `).join('');
+
+        // Draw Chart
+        AgriChart.renderLineChart(canvas, {
+          labels: pred.trendDays,
+          data: pred.trendPrices,
+          unit: '₹/kg',
+          lineColor: pred.direction === 'down' ? '#ef4444' : '#2d6a4f',
+          fillColor: pred.direction === 'down' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(82, 183, 136, 0.25)',
+          pointColor: pred.direction === 'down' ? '#991b1b' : '#1b4332'
+        });
+      }
+
+      // Initial render for Tomato
+      updatePrediction('Tomato');
+
+      // Crop change listeners
+      cropSelector.addEventListener('change', (e) => {
+        updatePrediction(e.target.value);
+      });
+
+      getPredBtn.addEventListener('click', () => {
+        App.showToast(`Updated AI forecast model for ${cropSelector.value}`, 'success');
+        updatePrediction(cropSelector.value);
+      });
+
+      // Window resize re-render
+      window.addEventListener('resize', () => {
+        updatePrediction(cropSelector.value);
+      });
+    });
+  </script>
+</body>
+</html>

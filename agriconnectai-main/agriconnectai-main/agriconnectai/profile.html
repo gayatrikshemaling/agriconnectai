@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - AgriConnect AI</title>
+  <meta name="description" content="Manage personal contact information, farm or business location, and account credentials.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="farmer-dashboard.html">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-products.html">
+            <span>🌾</span> My Products
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="ai-prediction.html">
+            <span>🤖</span> AI Intelligence
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="farmer-orders.html">
+            <span>📦</span> Orders
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">2</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html" class="active">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <h1 class="topbar-title">My Profile</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-success" id="profile-role-badge">Verified Account</span>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <div style="max-width: 720px; margin: 0 auto;">
+          <div class="card">
+            <!-- Profile Avatar Header matching Screen 17 -->
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-light);">
+              <div class="avatar-circle" style="width: 72px; height: 72px; font-size: 2rem;" id="profile-avatar">
+                R
+              </div>
+              <div>
+                <h2 id="profile-fullname" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Ramesh Patel</h2>
+                <div class="text-sm text-muted" id="profile-role-sub">Farmer • Mysuru, Karnataka</div>
+              </div>
+            </div>
+
+            <!-- Form matching Screen 17 -->
+            <form id="profile-form">
+              <div class="form-group">
+                <label class="form-label" for="profile-name">Full Name *</label>
+                <input type="text" id="profile-name" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profile-email">Email Address *</label>
+                <input type="email" id="profile-email" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profile-phone">Phone Number *</label>
+                <input type="tel" id="profile-phone" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profile-location">Location / District *</label>
+                <input type="text" id="profile-location" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Account Role</label>
+                <input type="text" id="profile-role" class="form-control" disabled style="background:#f1f5f9; cursor:not-allowed;">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profile-bio">Bio / Farm Description</label>
+                <textarea id="profile-bio" class="form-control" rows="3" placeholder="Tell buyers about your farming practices, certifications, or procurement preferences..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;" id="save-profile-btn">
+                Update Profile
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = window.store.getCurrentUser();
+      
+      const nameInput = document.getElementById('profile-name');
+      const emailInput = document.getElementById('profile-email');
+      const phoneInput = document.getElementById('profile-phone');
+      const locInput = document.getElementById('profile-location');
+      const roleInput = document.getElementById('profile-role');
+      const bioInput = document.getElementById('profile-bio');
+
+      if (user) {
+        nameInput.value = user.fullName || user.name;
+        emailInput.value = user.email;
+        phoneInput.value = user.phone || '+91 98765 43210';
+        locInput.value = user.location || 'Karnataka';
+        roleInput.value = user.role;
+        bioInput.value = user.bio || '';
+
+        document.getElementById('profile-fullname').textContent = user.fullName || user.name;
+        document.getElementById('profile-role-sub').textContent = `${user.role} • ${user.location}`;
+        document.getElementById('profile-avatar').textContent = user.name.charAt(0).toUpperCase();
+        document.getElementById('profile-role-badge').textContent = `${user.role} Account`;
+      }
+
+      document.getElementById('profile-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const updated = window.store.updateProfile({
+          fullName: nameInput.value.trim(),
+          name: nameInput.value.trim().split(' ')[0],
+          email: emailInput.value.trim(),
+          phone: phoneInput.value.trim(),
+          location: locInput.value.trim(),
+          bio: bioInput.value.trim()
+        });
+
+        App.showToast('Profile information updated successfully!', 'success');
+        document.getElementById('profile-fullname').textContent = updated.fullName;
+        document.getElementById('profile-role-sub').textContent = `${updated.role} • ${updated.location}`;
+      });
+    });
+  </script>
+</body>
+</html>

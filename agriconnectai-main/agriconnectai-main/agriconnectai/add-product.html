@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Agricultural Product - AgriConnect AI</title>
+  <meta name="description" content="List a new agricultural crop harvest with quantity, pricing, and farm details.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="farmer-dashboard.html">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="add-product.html" class="active">
+            <span>➕</span> Add Product
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-products.html">
+            <span>🌾</span> My Products
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="ai-prediction.html">
+            <span>🤖</span> AI Intelligence
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="farmer-orders.html">
+            <span>📦</span> Orders
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">2</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <h1 class="topbar-title">Add Agricultural Product</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="my-products.html" class="btn btn-outline btn-sm">View My Listings</a>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <div style="max-width: 860px; margin: 0 auto;">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <span>🌱</span> Produce Details & Pricing
+              </h3>
+              <span class="badge badge-primary">Direct Farm Gate Listing</span>
+            </div>
+
+            <form id="add-product-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="crop-name">Crop Name *</label>
+                  <select id="crop-name" class="form-control" required>
+                    <option value="Tomato" selected>Tomato (Ripe Heirloom)</option>
+                    <option value="Onion">Onion (Red Nasik)</option>
+                    <option value="Potato">Potato (Fresh Organic)</option>
+                    <option value="Carrot">Carrot (Sweet Ooty)</option>
+                    <option value="Wheat">Wheat (Golden Sharbati)</option>
+                    <option value="Rice">Rice (Sona Masoori)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="crop-category">Category *</label>
+                  <select id="crop-category" class="form-control" required>
+                    <option value="Vegetables" selected>Vegetables</option>
+                    <option value="Grains & Cereals">Grains & Cereals</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Pulses">Pulses</option>
+                    <option value="Spices">Spices</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="quantity">Available Quantity *</label>
+                  <div class="input-group">
+                    <input type="number" id="quantity" class="form-control" placeholder="e.g. 500" required min="1" value="250">
+                    <span class="input-addon">kg</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="price">Expected Price (₹ / kg) *</label>
+                  <div class="input-group">
+                    <span class="input-addon">₹</span>
+                    <input type="number" id="price" class="form-control" placeholder="e.g. 25" required min="1" value="28">
+                    <span class="input-addon">/ kg</span>
+                  </div>
+                  <small class="text-muted text-xs" id="price-hint">💡 APMC Wholesale Benchmark: ₹25/kg</small>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="location">Farm Location *</label>
+                  <input type="text" id="location" class="form-control" placeholder="e.g. Mysuru, Karnataka" required value="Mysuru, Karnataka">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="harvest-date">Harvest Date *</label>
+                  <input type="date" id="harvest-date" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="description">Product Description</label>
+                <textarea id="description" class="form-control" rows="3" placeholder="Describe quality, pesticide practices, packing type, etc.">Naturally cultivated fresh harvest. Packed in protective crates, ready for immediate loading at farm gate.</textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Produce Image</label>
+                <div class="flex items-center gap-4" style="flex-wrap: wrap;">
+                  <select id="preset-image" class="form-control" style="flex: 1; min-width: 220px;">
+                    <option value="images/tomatoes.jpg">🍅 Tomato Photo</option>
+                    <option value="images/onions.jpg">🧅 Onion Photo</option>
+                    <option value="images/potatoes.jpg">🥔 Potato Photo</option>
+                    <option value="images/carrots.jpg">🥕 Carrot Photo</option>
+                    <option value="images/wheat.jpg">🌾 Wheat Photo</option>
+                  </select>
+                  <div style="width: 60px; height: 60px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light);">
+                    <img id="image-preview" src="images/tomatoes.jpg" alt="Preview" style="width:100%; height:100%; object-fit:cover;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
+                <a href="farmer-dashboard.html" class="btn btn-outline">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-lg" id="submit-product-btn">
+                  🌾 Add Product to Marketplace
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set today as default harvest date
+      document.getElementById('harvest-date').value = new Date().toISOString().split('T')[0];
+
+      const cropSelect = document.getElementById('crop-name');
+      const imgSelect = document.getElementById('preset-image');
+      const previewImg = document.getElementById('image-preview');
+
+      // Auto update image preview
+      const cropImageMap = {
+        'Tomato': 'images/tomatoes.jpg',
+        'Onion': 'images/onions.jpg',
+        'Potato': 'images/potatoes.jpg',
+        'Carrot': 'images/carrots.jpg',
+        'Wheat': 'images/wheat.jpg',
+        'Rice': 'images/wheat.jpg'
+      };
+
+      cropSelect.addEventListener('change', (e) => {
+        const crop = e.target.value;
+        if (cropImageMap[crop]) {
+          imgSelect.value = cropImageMap[crop];
+          previewImg.src = cropImageMap[crop];
+        }
+      });
+
+      imgSelect.addEventListener('change', (e) => {
+        previewImg.src = e.target.value;
+      });
+
+      // Handle form submission
+      const form = document.getElementById('add-product-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const newProd = window.store.addProduct({
+          name: cropSelect.value,
+          category: document.getElementById('crop-category').value,
+          quantity: document.getElementById('quantity').value,
+          unit: 'kg',
+          price: document.getElementById('price').value,
+          location: document.getElementById('location').value,
+          harvestDate: document.getElementById('harvest-date').value,
+          description: document.getElementById('description').value,
+          image: imgSelect.value
+        });
+
+        App.showToast(`Listing for ${newProd.name} added successfully!`, 'success');
+
+        setTimeout(() => {
+          window.location.href = 'my-products.html';
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>

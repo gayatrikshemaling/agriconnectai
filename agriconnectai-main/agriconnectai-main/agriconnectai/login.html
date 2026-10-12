@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AgriConnect AI</title>
+  <meta name="description" content="Sign in to AgriConnect AI marketplace for farmers, buyers, and administrators.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <a href="index.html" class="brand" style="justify-content: center; margin-bottom: 0.75rem;">
+        <div class="brand-icon">🌱</div>
+        <span>AgriConnect <span class="ai-tag">AI</span></span>
+      </a>
+      <h2 style="font-size: 1.75rem; color: var(--primary);">Login</h2>
+      <p class="text-muted text-sm">Welcome back to the farmer-to-buyer marketplace</p>
+    </div>
+
+    <!-- 1-Click Demo Accounts -->
+    <div class="auth-demo-bar">
+      <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-align: center;">
+        ⚡ 1-CLICK INSTANT DEMO LOGIN
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+        <button type="button" class="btn btn-outline btn-sm" id="demo-farmer-btn" title="Login as Farmer Ramesh">
+          🌾 Ramesh
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" id="demo-buyer-btn" title="Login as Buyer Priya">
+          🛒 Priya
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" id="demo-admin-btn" title="Login as Admin">
+          🛡️ Admin
+        </button>
+      </div>
+    </div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label class="form-label" for="login-email">Email</label>
+        <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required value="ramesh@agri.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="login-password">Password</label>
+        <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required value="farmer123">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;" id="submit-login-btn">
+        Login
+      </button>
+
+      <div class="text-center" style="margin-top: 1.5rem;">
+        <span class="text-sm text-muted">Don't have an account? </span>
+        <a href="register.html" class="text-sm font-semibold" style="color: var(--primary);">Register</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('login-form');
+      const emailInput = document.getElementById('login-email');
+      const passwordInput = document.getElementById('login-password');
+
+      function performLogin(email, role) {
+        try {
+          const user = window.store.login(email, role);
+          App.showToast(`Welcome back, ${user.name}! (${user.role})`, 'success');
+          
+          setTimeout(() => {
+            if (user.role === 'Farmer') {
+              window.location.href = 'farmer-dashboard.html';
+            } else if (user.role === 'Buyer') {
+              window.location.href = 'buyer-dashboard.html';
+            } else if (user.role === 'Admin') {
+              window.location.href = 'admin-dashboard.html';
+            } else {
+              window.location.href = 'index.html';
+            }
+          }, 600);
+        } catch (err) {
+          App.showToast(err.message, 'error');
+        }
+      }
+
+      // Demo buttons
+      document.getElementById('demo-farmer-btn').addEventListener('click', () => {
+        emailInput.value = 'ramesh@agri.com';
+        passwordInput.value = 'farmer123';
+        performLogin('ramesh@agri.com', 'Farmer');
+      });
+
+      document.getElementById('demo-buyer-btn').addEventListener('click', () => {
+        emailInput.value = 'priya@freshmart.com';
+        passwordInput.value = 'buyer123';
+        performLogin('priya@freshmart.com', 'Buyer');
+      });
+
+      document.getElementById('demo-admin-btn').addEventListener('click', () => {
+        emailInput.value = 'admin@agriconnect.ai';
+        passwordInput.value = 'admin123';
+        performLogin('admin@agriconnect.ai', 'Admin');
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        performLogin(emailInput.value.trim());
+      });
+    });
+  </script>
+</body>
+</html>

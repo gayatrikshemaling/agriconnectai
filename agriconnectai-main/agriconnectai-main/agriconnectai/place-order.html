@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place Order - AgriConnect AI</title>
+  <meta name="description" content="Place wholesale farm order with instant stock checks and transparent total calculations.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html">
+          <span style="font-size:1.4rem;">🌱</span>
+          <span>AgriConnect <span style="color:var(--accent-green);">AI</span></span>
+        </a>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-category">Main Menu</li>
+        <li class="sidebar-item">
+          <a href="buyer-dashboard.html">
+            <span>📊</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="marketplace.html">
+            <span>🛒</span> Marketplace
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="my-orders.html" class="active">
+            <span>📦</span> My Orders
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="market-prices.html">
+            <span>📈</span> Market Prices
+          </a>
+        </li>
+
+        <li class="menu-category">Account</li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <span>🔔</span> Notifications
+            <span class="item-badge notif-badge">1</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html">
+            <span>👤</span> Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="logout-trigger">
+            <span>🚪</span> Logout
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" style="margin-right: 0.5rem;">☰</button>
+          <h1 class="topbar-title">Place Order</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="marketplace.html" class="btn btn-outline btn-sm">← Back to Marketplace</a>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <div style="max-width: 680px; margin: 0 auto;">
+          <div class="card">
+            <!-- Produce Summary Card matching Screen 12 -->
+            <div style="display: flex; align-items: center; gap: 1.25rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-light); margin-bottom: 1.5rem;">
+              <img id="order-img" src="images/tomatoes.jpg" alt="Tomato" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+              <div>
+                <h3 id="order-prod-name" style="font-size: 1.45rem; margin-bottom: 0.25rem;">Tomato</h3>
+                <div style="font-size: 0.95rem; color: var(--primary); font-weight: 700;" id="order-price-line">
+                  ₹25/kg <span class="text-muted font-normal">• 500 kg available</span>
+                </div>
+                <div class="text-xs text-muted" id="order-farmer-line">
+                  Farmer: Ramesh • Mysuru
+                </div>
+              </div>
+            </div>
+
+            <!-- Form matching Screen 12 -->
+            <form id="place-order-form">
+              <input type="hidden" id="order-product-id">
+
+              <div class="form-group">
+                <label class="form-label" for="order-qty">Order Quantity (kg) *</label>
+                <div class="input-group">
+                  <input type="number" id="order-qty" class="form-control" placeholder="Enter quantity" required min="1" value="50">
+                  <span class="input-addon">kg</span>
+                </div>
+                <small class="text-xs text-muted" id="stock-hint">Maximum available: 500 kg</small>
+              </div>
+
+              <!-- Total Price Display Box matching Screen 12 -->
+              <div class="card" style="background: #f0fdf4; border: 1.5px solid #86efac; padding: 1.25rem; margin-bottom: 1.5rem;">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <span class="text-xs text-muted" style="text-transform: uppercase; font-weight: 700;">Calculated Total Price</span>
+                    <h3 style="font-size: 1.85rem; color: var(--primary); font-family: 'Outfit', sans-serif;" id="calculated-total">
+                      ₹1,250
+                    </h3>
+                  </div>
+                  <div class="text-right text-xs text-muted">
+                    <span>Direct Farm Gate Price</span><br>
+                    <span>Zero Brokerage</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="order-location">Delivery / Destination Address *</label>
+                <input type="text" id="order-location" class="form-control" placeholder="Enter warehouse/store address" required value="FreshMart Depot, Indiranagar, Bengaluru">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="order-message">Message (Optional)</label>
+                <textarea id="order-message" class="form-control" rows="3" placeholder="Add specific packing, delivery timing, or transport instructions...">Please ensure safe wooden crate packaging and deliver before noon.</textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;" id="submit-order-btn">
+                ✅ Confirm & Place Order
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prodId = urlParams.get('productId') || 'prod-001';
+      const p = window.store.getProductById(prodId) || window.store.getProducts()[0];
+
+      let unitPrice = 25;
+      let maxStock = 500;
+
+      if (p) {
+        unitPrice = p.price;
+        maxStock = p.quantity;
+        document.getElementById('order-product-id').value = p.id;
+        document.getElementById('order-prod-name').textContent = p.name;
+        document.getElementById('order-price-line').innerHTML = `₹${p.price}/${p.unit} <span class="text-muted font-normal">• ${p.quantity} ${p.unit} available</span>`;
+        document.getElementById('order-farmer-line').textContent = `Farmer: ${p.farmerName} • ${p.location}`;
+        document.getElementById('order-img').src = p.image;
+        document.getElementById('stock-hint').textContent = `Maximum available: ${p.quantity} ${p.unit}`;
+        document.getElementById('order-qty').max = p.quantity;
+      }
+
+      const qtyInput = document.getElementById('order-qty');
+      const totalDisplay = document.getElementById('calculated-total');
+
+      function calculateTotal() {
+        const qty = Number(qtyInput.value) || 0;
+        const total = qty * unitPrice;
+        totalDisplay.textContent = `₹${total.toLocaleString('en-IN')}`;
+      }
+
+      qtyInput.addEventListener('input', calculateTotal);
+      calculateTotal();
+
+      // Submit Order
+      document.getElementById('place-order-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const qty = Number(qtyInput.value);
+
+        if (qty > maxStock) {
+          App.showToast(`Cannot order more than available stock (${maxStock} kg)`, 'error');
+          return;
+        }
+
+        try {
+          const newOrder = window.store.placeOrder({
+            productId: p.id,
+            quantity: qty,
+            deliveryLocation: document.getElementById('order-location').value,
+            message: document.getElementById('order-message').value
+          });
+
+          App.showToast(`Order ${newOrder.id} placed successfully!`, 'success');
+
+          setTimeout(() => {
+            window.location.href = 'my-orders.html';
+          }, 800);
+        } catch (err) {
+          App.showToast(err.message, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
